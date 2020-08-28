@@ -1,0 +1,32 @@
+
+<!-- <p>{{product.id}}</p> -->
+<!-- <div>
+    <label>name:
+      <input [(ngModel)]="product.name" ngbind:placeholder="name"/>
+    </label>
+</div> -->
+
+<div>
+    <label>Product Name:
+        <input #productName />
+    </label>
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button (click)="add(productName.value); productName.value=''">
+        add
+    </button>
+</div>
+
+<div style="display: inline-block;">
+    <ul class="products" style="float: left;">
+        <!-- displaying lists *ngFor, event binding (click), class binding [class.some-css-class]="some expression" -->
+        <li *ngFor="let product of products" >
+            <a routerLink="/detail/{{product.id}}">
+                <span class="badge">{{product.id}}</span> {{product.name}} 
+            </a>
+            <button class="delete" (click)="delete(product)">x</button>
+        </li>
+    </ul>
+
+    <!-- <app-product-detail [product]="selectedProduct" ></app-product-detail> -->
+
+</div>

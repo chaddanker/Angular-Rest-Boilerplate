@@ -1,0 +1,12 @@
+<!-- conditional statements *ngIf -->
+<div class="details" *ngIf="product">
+    <h2>{{product.name | uppercase}} Details</h2>
+    <div><span>id: </span>{{product.id}}</div>
+    <div>
+        <label>Name:
+            <input [(ngModel)]="product.name" placeholder="name" />
+        </label>
+    </div>
+    <button (click)="goBack()" >back</button>
+    <button (click)="save()">save</button>
+</div>
