@@ -36,9 +36,10 @@ export class ProductService {
   }
 
   updateProduct(product: Product): Observable<any> {
-    return this.http.put(this.productsUrl, product, this.httpOptions).pipe(
+    const url = `${this.productsUrl}/${product.id}`;
+    return this.http.put(url, product, this.httpOptions).pipe(
       tap(_ => this.log(`updated product id=${product.id}`)),
-      catchError(this.handleError<any>('updatedHero'))
+      catchError(this.handleError<any>('updateProduct'))
     );
   }
 
@@ -59,6 +60,7 @@ export class ProductService {
     );
   }
 
+  //route: /api/products/?name=term
   searchProducts(term: string): Observable<Product[]> {
     if(!term.trim()) {
       //return empty array
@@ -76,7 +78,7 @@ export class ProductService {
     this.messageService.add(`ProductService: ${message}`);
   }
 
-  private productsUrl = 'api/products'; //URL to web api
+  private productsUrl = 'https://localhost:5001/api/products'; //URL to web api
 
   /**
  * Handle Http operation that failed.
@@ -97,4 +99,8 @@ export class ProductService {
         return of(result as T);
    }
  }
+
+  // genId(products: Product[]): number {
+  //   return products.length > 0 ? Math.max(...products.map(product => product.id)) + 1 : 11;
+  // }
 }
